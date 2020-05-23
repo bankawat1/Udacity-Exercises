@@ -99,9 +99,9 @@ class NeuralNetwork(object):
         #print('hidden_error',hidden_error.shape)
         
         # TODO: Backpropagated error terms - Replace these values with your calculations.
-        #output_error_term = error
+        output_error_term = error
         
-        #hidden_error_term = hidden_error * hidden_outputs * (1 - hidden_outputs)
+        hidden_error_term = hidden_error * hidden_outputs * (1 - hidden_outputs)
         
         # Weight step (input to hidden)
         delta_weights_i_h += hidden_error.dot(X.T).T
@@ -154,7 +154,7 @@ class NeuralNetwork(object):
 #########################################################
 # Set your hyperparameters here
 ##########################################################
-iterations = 3000
-learning_rate = .8
-hidden_nodes = 12
+iterations = 400
+learning_rate = .01
+hidden_nodes = 50
 output_nodes = 1
