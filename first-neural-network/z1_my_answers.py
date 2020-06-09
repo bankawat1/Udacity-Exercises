@@ -7,9 +7,6 @@ class NeuralNetwork(object):
         self.input_nodes = input_nodes
         self.hidden_nodes = hidden_nodes
         self.output_nodes = output_nodes
-        self.velocity1 = 0
-        self.velocity2 = 0
-        self.momentum = 0.7
 
         # Initialize weights
         self.weights_input_to_hidden = np.random.normal(0.0, self.input_nodes**-0.5, 
@@ -125,20 +122,13 @@ class NeuralNetwork(object):
 
         '''
         #print('self.weights_hidden_to_output',self.weights_hidden_to_output)
-        #self.weights_hidden_to_output -= (self.lr/n_records)*delta_weights_h_o # update hidden-to-output weights with gradient descent step
-        #self.weights_input_to_hidden -= (self.lr/n_records)*delta_weights_i_h # update input-to-hidden weights with gradient descent step
+        self.weights_hidden_to_output -= (self.lr/n_records)*delta_weights_h_o # update hidden-to-output weights with gradient descent step
+        self.weights_input_to_hidden -= (self.lr/n_records)*delta_weights_i_h # update input-to-hidden weights with gradient descent step
         #print('weights_hidden_to_output',self.weights_hidden_to_output.T)
         #print('weights_input_to_hidden',self.weights_input_to_hidden.T)
         #print('(self.lr/n_records)*delta_weights_h_o',(self.lr/n_records)*delta_weights_h_o)
         #print('(self.lr/n_records)*delta_weights_i_h',(self.lr/n_records)*delta_weights_i_h)
         #print(self.lr)
-
-        #code for using Momentum with learning rate...
-        self.velocity1 = self.momentum*self.velocity1 - (self.lr/n_records)*delta_weights_h_o 
-        self.weights_hidden_to_output += self.velocity1
-
-        self.velocity2 = self.momentum*self.velocity2 - (self.lr/n_records)*delta_weights_i_h
-        self.weights_input_to_hidden += self.velocity2
         
 
     def run(self, features):
@@ -165,7 +155,6 @@ class NeuralNetwork(object):
 # Set your hyperparameters here
 ##########################################################
 iterations = 500
-learning_rate = .0045
+learning_rate = .8
 hidden_nodes = 12
 output_nodes = 1
-
